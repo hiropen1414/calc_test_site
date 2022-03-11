@@ -1,17 +1,19 @@
 'use strict';
-const planet ="please input two numbers with space";
+const RET="smaller is ";
+
+const planet ="please input two numbers with ,";
 let result = prompt(planet);
-let num[2]=result.split(" ");
-let ret = grtLower(num);
-alert(`smaller is ${ret}`)
+let num=result.split(",");
+let ret = getLower(num);
+alert(ret)
 
 
 function getLower(num){
 	if(+num[0] < +num[1]){
-		return num[0];
+		return RET + num[0];
 	}else if(+num[0] > +num[1]){
-		return num[1];
+		return RET + num[1];
 	}else{
-		return Nane. Same.;
+		return "Same";
 	}
 }

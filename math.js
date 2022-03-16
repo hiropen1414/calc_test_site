@@ -39,25 +39,29 @@ function Generatenum () {// Generate two random numbers and symbol which indicat
 			break;
 	}
 }
-let a = "";
+let a = "<hr class='ho' />";
 function Ask() {// Display the question.
 	alert(`${attention} Enterを押したらスタートします。`);
 	let startTime = Date.now();
-	document.write(`${attention}<br>`);
 	for(let times = 1 ; times <= 10 ; times++){
 		Generatenum();
 		let ans = prompt(`Q${times}: ${sign["randnum0"]} ${sign["met"]} ${sign["randnum1"]} = `);
-		let writeletter = `Q${times}:${sign["randnum0"]} ${sign["met"]} ${sign["randnum1"]}<br>your answer: ${ans}<br>collect: ${sign["answer"]}<br>${Judge(ans)}<br><br>`;
+		let writeletter = `Q${times}:  ${sign["randnum0"]} ${sign["met"]} ${sign["randnum1"]}=<br>your answer: ${ans}   , collect: ${sign["answer"]}<br><br>${Judge(ans)}<br><hr class="ho" /><br>`;
 		a += writeletter;
 	}
 	let endTime = Date.now() - startTime;
 	alert(`time:${Math.ceil(endTime * 0.1)/100}s`);
 	let element = document.getElementById('time');
-	element.outerHTML = `<h3>your time:${Math.ceil(endTime * 0.1)/100}s<br>score:${sign["score"]}</h3><h5>${a}</h5>`;
+	element.outerHTML = `<div class="sample_box11">
+	<div class="sample_box11_tape"> </div>
+	<p class="sample_box11_title">Score:${sign["score"]}<br><br></p>
+	<p class="sample_box11_subtitle"></p><p>${a}<br<br></p>
+	<p class="tim">times:${Math.ceil(endTime * 0.1)/100}s</p>
+	</div>`;
 }
 
 function Judge(ans) {//Compare one's answer with the correct answer.
-	if (ans !== ''  && Number(ans) === sign["answer"]){
+	if (ans !== ''  && ans !== null && Number(ans) === sign["answer"]){
 		sign["score"] += 10;
 		return "Great! :)";
 	}else{
@@ -67,10 +71,10 @@ function Judge(ans) {//Compare one's answer with the correct answer.
 
 Ask();
 
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-// canvas.width = window.innerWidth;
-// canvas.height = window.innerHeight;
+const CANVAS = document.getElementById('canvas');
+const CTX = CANVAS.getContext('2d');
+CANVAS.width = window.innerWidth;
+CANVAS.height = window.innerHeight * 1.5;
 
 window.requestAnimationFrame = 
   window.requestAnimationFrame ||
@@ -79,7 +83,7 @@ window.requestAnimationFrame =
   window.msRequestAnimationFrame ||
   function (cb) { setTimeout(cb, 17); };
 
-const NUM = 90; // 表示数
+const NUM = 90; 
 const particles = [];
 
 class Particle {
@@ -93,20 +97,20 @@ class Particle {
   }
   render() {
     if(this.index % 3 === 0) {
-      ctx.fillStyle = "#FBDAC8";
-      ctx.fill();
+      CTX.fillStyle = "#FBDAC8";
+      CTX.fill();
     } else if(this.index % 3 === 1) {
-		ctx.globalAlpha = 0.6;
-		ctx.fillStyle = "#F3E100";
-		ctx.fill()
+		CTX.globalAlpha = 0.6;
+		CTX.fillStyle = "#F3E100";
+		CTX.fill()
     }else {
-      ctx.globalAlpha = 1;
-      ctx.fillStyle = "#f29c97";
-      ctx.fill();
+      CTX.globalAlpha = 1;
+      CTX.fillStyle = "#f29c97";
+      CTX.fill();
     }
-    // 円をかく
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+
+    CTX.beginPath();
+    CTX.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
     
     
   }
@@ -114,10 +118,10 @@ class Particle {
 
     this.x += (Math.sin(this.directionX + 180)) * 0.25;
 	this.y += (Math.sin(this.directionY)) * 0.25;
-    if(this.x > canvas.width + this.radius) {
+    if(this.x > CANVAS.width + this.radius) {
       this.x = -this.radius;
     }
-	if(this.y > canvas.height + this.radius) {
+	if(this.y > CANVAS.height + this.radius) {
 		this.y = -this.radius;
 	}
     
@@ -131,8 +135,8 @@ render();
 function init() {
   for(let i = 0; i < NUM; i++) {
     // particles 
-    const x = Math.random() * canvas.width;
-    const y = Math.random() * canvas.height;
+    const x = Math.random() * CANVAS.width;
+    const y = Math.random() * CANVAS.height;
     const radius = Math.floor(Math.random() * 50);
     const directionX = Math.random() * 10;
     const directionY = Math.random() * 10;
@@ -142,13 +146,17 @@ function init() {
 }
 
 function render() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  CTX.clearRect(0, 0, CANVAS.width, CANVAS.height);
   for(let i = 0; i < particles.length; i++) {
     particles[i].update();
   }
   requestAnimationFrame(render);
 }
-// const CANVAS = document.getElementById('canvas');
+
+document.getElementById('retry').addEventListener("click",function(){
+	window.location.reload()
+});
+// const CANVAS = document.getElementById('CANVAS');
 // const CTX = CANVAS.getContext('2d');
 
 // class Particle {

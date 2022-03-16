@@ -6,15 +6,25 @@
 </head>
 <body>
 	<div class="main">
-		<canvas id="canvas" width="1500" height="1500"></canvas>
+		<canvas id="canvas"></canvas>
 		<h2><i class="far fa-lightbulb"></i><span>計算テスト</span></h2>
 		<div id = "time">
-			<h5>a</h5>
-			<h3>your time:0.00s</h3>
-			
+			<div class="sample_box11">
+				<div class="sample_box11_tape"> </div>
+				<p class="sample_box11_title">Score:</p>
+				<p class="sample_box11_subtitle"></p>
+				<p>0</p>
+				<p class="tim">0</p>
+			</div>
+			<!-- <h5>a</h5>
+			<h3>your time:0.00s</h3> -->
 		</div>
+		<div id="retry">
+			<h4>再トライする</h4>
+		</div>
+		
 		<script src="math.js"></script>
-		<input type="button" value="再トライする" onclick="window.location.reload();" />
+		
 	</div>
 	
 </body>
